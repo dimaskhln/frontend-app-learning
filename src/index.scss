@@ -1,9 +1,9 @@
-@import "~@edx/brand/paragon/fonts";
-@import "~@edx/brand/paragon/variables";
-@import "~@edx/paragon/scss/core/core";
-@import "~@edx/brand/paragon/overrides";
+@import '~@edx/brand/paragon/fonts';
+@import '~@edx/brand/paragon/variables';
+@import '~@edx/paragon/scss/core/core';
+@import '~@edx/brand/paragon/overrides';
 
-@import "~@edx/frontend-component-footer/dist/footer";
+@import '~@edx/frontend-component-footer/dist/footer';
 
 #root {
   display: flex;
@@ -34,6 +34,10 @@
   footer {
     flex: 0;
   }
+}
+
+.learning-header {
+  background: #727272;
 }
 
 .course-tabs-navigation {
@@ -72,7 +76,7 @@
     &.active {
       font-weight: $font-weight-normal;
       color: $primary-500;
-      border-bottom-color: $primary-500;
+      border-bottom-color: #ff0000;
     }
   }
 }
@@ -85,7 +89,7 @@
 
   // On mobile, the unit container will be responsible
   // for container padding.
-  @media (min-width: map-get($grid-breakpoints, "sm")) {
+  @media (min-width: map-get($grid-breakpoints, 'sm')) {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
@@ -93,7 +97,7 @@
 }
 
 .sequence {
-  @media (min-width: map-get($grid-breakpoints, "sm")) {
+  @media (min-width: map-get($grid-breakpoints, 'sm')) {
     border: solid 1px #eaeaea;
     border-radius: 4px;
   }
@@ -102,7 +106,7 @@
 .sequence-navigation {
   display: flex;
 
-  @media (min-width: map-get($grid-breakpoints, "sm")) {
+  @media (min-width: map-get($grid-breakpoints, 'sm')) {
     margin: -1px -1px 0;
   }
 
@@ -133,7 +137,7 @@
 
     &.active {
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -1px;
         left: 0;
@@ -205,7 +209,7 @@
         }
 
         &:after {
-          content: "";
+          content: '';
           position: absolute;
           bottom: 0px;
           left: 0px;
@@ -234,12 +238,12 @@
     justify-content: center;
     align-items: center;
 
-    @media (max-width: -1 + map-get($grid-breakpoints, "sm")) {
+    @media (max-width: -1 + map-get($grid-breakpoints, 'sm')) {
       padding-top: 1rem;
       padding-bottom: 1rem;
     }
 
-    @media (min-width: map-get($grid-breakpoints, "sm")) {
+    @media (min-width: map-get($grid-breakpoints, 'sm')) {
       min-width: fit-content;
       padding-left: 2rem;
       padding-right: 2rem;
@@ -250,7 +254,7 @@
     border-left-width: 0;
     margin-left: 0;
 
-    @media (min-width: map-get($grid-breakpoints, "sm")) {
+    @media (min-width: map-get($grid-breakpoints, 'sm')) {
       border-left-width: 1px;
       border-top-left-radius: 4px;
     }
@@ -260,7 +264,7 @@
     border-left-width: 1px;
     border-right-width: 0;
 
-    @media (min-width: map-get($grid-breakpoints, "sm")) {
+    @media (min-width: map-get($grid-breakpoints, 'sm')) {
       border-top-right-radius: 4px;
       border-right-width: 1px;
     }
@@ -328,7 +332,7 @@
   // I don't like this.  We need to set a height of 100% on a div created by react-focus-on, a
   // package we use in our Modal.  That div has no class name or ID, so instead we're uniquely
   // identifying it by based on a unique attribute it has which its siblings don't share.
-  > div[data-focus-lock-disabled="false"] {
+  > div[data-focus-lock-disabled='false'] {
     height: 100%;
   }
 
@@ -358,25 +362,25 @@
 
 .raised-card {
   border: 0 !important;
-  box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, .2) !important;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2) !important;
 }
 
 // Import component-specific sass files
-@import "courseware/course/celebration/CelebrationModal.scss";
-@import "courseware/course/sidebar/sidebars/notifications/NotificationIcon.scss";
-@import "courseware/course/sequence/lock-paywall/LockPaywall.scss";
-@import "shared/streak-celebration/StreakCelebrationModal.scss";
-@import "courseware/course/content-tools/calculator/calculator.scss";
-@import "courseware/course/content-tools/contentTools.scss";
-@import "course-home/dates-tab/timeline/Day.scss";
-@import "generic/upgrade-notification/UpgradeNotification.scss";
-@import "generic/upsell-bullets/UpsellBullets.scss";
-@import "course-home/outline-tab/widgets/ProctoringInfoPanel.scss";
-@import "src/course-home/outline-tab/widgets/FlagButton.scss";
-@import "course-home/progress-tab/course-completion/CompletionDonutChart.scss";
-@import "course-home/progress-tab/grades/course-grade/GradeBar.scss";
-@import "courseware/course/course-exit/CourseRecommendations";
-@import "product-tours/newUserCourseHomeTour/NewUserCourseHomeTourModal.scss";
+@import 'courseware/course/celebration/CelebrationModal.scss';
+@import 'courseware/course/sidebar/sidebars/notifications/NotificationIcon.scss';
+@import 'courseware/course/sequence/lock-paywall/LockPaywall.scss';
+@import 'shared/streak-celebration/StreakCelebrationModal.scss';
+@import 'courseware/course/content-tools/calculator/calculator.scss';
+@import 'courseware/course/content-tools/contentTools.scss';
+@import 'course-home/dates-tab/timeline/Day.scss';
+@import 'generic/upgrade-notification/UpgradeNotification.scss';
+@import 'generic/upsell-bullets/UpsellBullets.scss';
+@import 'course-home/outline-tab/widgets/ProctoringInfoPanel.scss';
+@import 'src/course-home/outline-tab/widgets/FlagButton.scss';
+@import 'course-home/progress-tab/course-completion/CompletionDonutChart.scss';
+@import 'course-home/progress-tab/grades/course-grade/GradeBar.scss';
+@import 'courseware/course/course-exit/CourseRecommendations';
+@import 'product-tours/newUserCourseHomeTour/NewUserCourseHomeTourModal.scss';
 
 /** [MM-P2P] Experiment */
-@import "experiments/mm-p2p/index.scss";
+@import 'experiments/mm-p2p/index.scss';
