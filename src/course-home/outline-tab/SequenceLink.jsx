@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import {
-  FormattedMessage,
-  FormattedTime,
-  injectIntl,
-  intlShape,
-} from '@edx/frontend-platform/i18n';
+import { FormattedMessage, FormattedTime, injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,23 +11,9 @@ import EffortEstimate from '../../shared/effort-estimate';
 import { useModel } from '../../generic/model-store';
 import messages from './messages';
 
-function SequenceLink({
-  id,
-  intl,
-  courseId,
-  first,
-  sequence,
-}) {
-  const {
-    complete,
-    description,
-    due,
-    showLink,
-    title,
-  } = sequence;
-  const {
-    userTimezone,
-  } = useModel('outline', courseId);
+function SequenceLink({ id, intl, courseId, first, sequence }) {
+  const { complete, description, due, showLink, title } = sequence;
+  const { userTimezone } = useModel('outline', courseId);
 
   const timezoneFormatArgs = userTimezone ? { timeZone: userTimezone } : {};
 
@@ -45,28 +26,14 @@ function SequenceLink({
         <div className="row w-100 m-0">
           <div className="col-auto p-0">
             {complete ? (
-              <FontAwesomeIcon
-                icon={fasCheckCircle}
-                fixedWidth
-                className="float-left text-success mt-1"
-                aria-hidden="true"
-                title={intl.formatMessage(messages.completedAssignment)}
-              />
+              <FontAwesomeIcon icon={fasCheckCircle} fixedWidth className="float-left text-success mt-1" aria-hidden="true" title={intl.formatMessage(messages.completedAssignment)} />
             ) : (
-              <FontAwesomeIcon
-                icon={farCheckCircle}
-                fixedWidth
-                className="float-left text-gray-400 mt-1"
-                aria-hidden="true"
-                title={intl.formatMessage(messages.incompleteAssignment)}
-              />
+              <FontAwesomeIcon icon={farCheckCircle} fixedWidth className="float-left text-gray-400 mt-1" aria-hidden="true" title={intl.formatMessage(messages.incompleteAssignment)} />
             )}
           </div>
           <div className="col-10 p-0 ml-3 text-break">
             <span className="align-middle">{displayTitle}</span>
-            <span className="sr-only">
-              , {intl.formatMessage(complete ? messages.completedAssignment : messages.incompleteAssignment)}
-            </span>
+            <span className="sr-only">, {intl.formatMessage(complete ? messages.completedAssignment : messages.incompleteAssignment)}</span>
             <EffortEstimate className="ml-3 align-middle" block={sequence} />
           </div>
         </div>
@@ -78,17 +45,7 @@ function SequenceLink({
                 defaultMessage="{description} due {assignmentDue}"
                 description="Used below an assignment title"
                 values={{
-                  assignmentDue: (
-                    <FormattedTime
-                      key={`${id}-due`}
-                      day="numeric"
-                      month="short"
-                      year="numeric"
-                      timeZoneName="short"
-                      value={due}
-                      {...timezoneFormatArgs}
-                    />
-                  ),
+                  assignmentDue: <FormattedTime key={`${id}-due`} day="numeric" month="short" year="numeric" timeZoneName="short" value={due} {...timezoneFormatArgs} />,
                   description: description || '',
                 }}
               />

@@ -1,13 +1,8 @@
 /* eslint-disable no-use-before-define */
-import React, {
-  useEffect, useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  sendTrackEvent,
-  sendTrackingLogEvent,
-} from '@edx/frontend-platform/analytics';
+import { sendTrackEvent, sendTrackingLogEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { useSelector } from 'react-redux';
 import { history } from '@edx/frontend-platform';
@@ -29,26 +24,15 @@ import SequenceContent from './SequenceContent';
 /** [MM-P2P] Experiment */
 import { isMobile } from '../../../experiments/mm-p2p/utils';
 import { MMP2PFlyover, MMP2PFlyoverMobile } from '../../../experiments/mm-p2p';
+import CourseUnitsList from '../CourseUnitsList';
 
-function Sequence({
-  unitId,
-  sequenceId,
-  courseId,
-  unitNavigationHandler,
-  nextSequenceHandler,
-  previousSequenceHandler,
-  intl,
-  mmp2p,
-}) {
+function Sequence({ unitId, sequenceId, courseId, unitNavigationHandler, nextSequenceHandler, previousSequenceHandler, intl, mmp2p }) {
   const course = useModel('coursewareMeta', courseId);
-  const {
-    isStaff,
-    originalUserIsStaff,
-  } = useModel('courseHomeMeta', courseId);
+  const { isStaff, originalUserIsStaff } = useModel('courseHomeMeta', courseId);
   const sequence = useModel('sequences', sequenceId);
   const unit = useModel('units', unitId);
-  const sequenceStatus = useSelector(state => state.courseware.sequenceStatus);
-  const sequenceMightBeUnit = useSelector(state => state.courseware.sequenceMightBeUnit);
+  const sequenceStatus = useSelector((state) => state.courseware.sequenceStatus);
+  const sequenceMightBeUnit = useSelector((state) => state.courseware.sequenceMightBeUnit);
   const shouldDisplayNotificationTriggerInSequence = useWindowSize().width < breakpoints.small.minWidth;
 
   const handleNext = () => {
@@ -128,13 +112,9 @@ function Sequence({
   const loading = sequenceStatus === 'loading' || (sequenceStatus === 'failed' && sequenceMightBeUnit);
   if (loading) {
     if (!sequenceId) {
-      return (<div> {intl.formatMessage(messages.noContent)} </div>);
+      return <div> {intl.formatMessage(messages.noContent)} </div>;
     }
-    return (
-      <PageLoading
-        srMessage={intl.formatMessage(messages.loadingSequence)}
-      />
-    );
+    return <PageLoading srMessage={intl.formatMessage(messages.loadingSequence)} />;
   }
 
   if (sequenceStatus === 'loaded' && sequence.isHiddenAfterDue) {
@@ -155,10 +135,8 @@ function Sequence({
           sequenceId={sequenceId}
           unitId={unitId}
           className="mb-4"
-
           /** [MM-P2P] Experiment */
           mmp2p={mmp2p}
-
           nextSequenceHandler={() => {
             logEvent('edx.ui.lms.sequence.next_selected', 'top');
             handleNext();
@@ -186,43 +164,33 @@ function Sequence({
             mmp2p={mmp2p}
           />
           {unitHasLoaded && (
-          <UnitNavigation
-            sequenceId={sequenceId}
-            unitId={unitId}
-            onClickPrevious={() => {
-              logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
-              handlePrevious();
-            }}
-            onClickNext={() => {
-              logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
-              handleNext();
-            }}
-            goToCourseExitPage={() => goToCourseExitPage()}
-          />
+            <UnitNavigation
+              sequenceId={sequenceId}
+              unitId={unitId}
+              onClickPrevious={() => {
+                logEvent('edx.ui.lms.sequence.previous_selected', 'bottom');
+                handlePrevious();
+              }}
+              onClickNext={() => {
+                logEvent('edx.ui.lms.sequence.next_selected', 'bottom');
+                handleNext();
+              }}
+              goToCourseExitPage={() => goToCourseExitPage()}
+            />
           )}
         </div>
       </div>
       <Sidebar />
 
       {/** [MM-P2P] Experiment */}
-      {(mmp2p.state.isEnabled && mmp2p.flyover.isVisible) && (
-        isMobile()
-          ? <MMP2PFlyoverMobile options={mmp2p} />
-          : <MMP2PFlyover options={mmp2p} />
-      )}
+      {mmp2p.state.isEnabled && mmp2p.flyover.isVisible && (isMobile() ? <MMP2PFlyoverMobile options={mmp2p} /> : <MMP2PFlyover options={mmp2p} />)}
     </div>
   );
 
   if (sequenceStatus === 'loaded') {
     return (
       <div>
-        <SequenceExamWrapper
-          sequence={sequence}
-          courseId={courseId}
-          isStaff={isStaff}
-          originalUserIsStaff={originalUserIsStaff}
-          canAccessProctoredExams={course.canAccessProctoredExams}
-        >
+        <SequenceExamWrapper sequence={sequence} courseId={courseId} isStaff={isStaff} originalUserIsStaff={originalUserIsStaff} canAccessProctoredExams={course.canAccessProctoredExams}>
           {defaultContent}
         </SequenceExamWrapper>
         <CourseLicense license={course.license || undefined} />
